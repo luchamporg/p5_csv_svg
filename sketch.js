@@ -12,6 +12,7 @@ function preload() {
 }
 
 function setup() {
+  //angleMode(DEGREES);
   createCanvas(windowWidth, windowHeight, SVG);
 
   //El ancho de la pantalla dividido para el número de columnas
@@ -21,11 +22,13 @@ function setup() {
   cellHeight = (height - margen) / data.rows.length;
 
   //Verifica que se cargan los datos del CSV
-  print(cellWidth, cellHeight);
+  //print(cellWidth, cellHeight);
 }
 
 function draw() {
   //circle(mouseX, mouseY, 20);
+  background(255);
+  strokeWeight(2);
 
   for (let i = 0; i < data.columns.length; i++) {
     const x = i * cellWidth + margen / 2;
@@ -34,8 +37,13 @@ function draw() {
       fill(125);
       noStroke();
       //circle(x, y, 10);
-      const d = data.rows[j].arr[i];
-      text(d, x, y);
+      const numero = int(data.rows[j].arr[i] / 100000);
+      if (numero) {
+        const v = p5.Vector.random2D();
+        //v.setMag(10);
+        line(x, y, v.x, v.y);
+        //text(numero, x, y);
+      }
     }
   }
 
